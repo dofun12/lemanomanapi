@@ -17,7 +17,7 @@ public class FileUtilsLemanoman {
 		String sCurrentLine;
 
 		while ((sCurrentLine = br.readLine()) != null) {
-			System.out.println(sCurrentLine);
+			lines.add(sCurrentLine);
 		}
 
 	} catch (IOException e) {
