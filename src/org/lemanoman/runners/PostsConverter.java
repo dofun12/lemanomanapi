@@ -27,17 +27,21 @@ public class PostsConverter {
 			
 			String dateHoje = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
 			File postJsonFile = new File("/home/kevim/workspace-php/raspsite/posts.json");
+			if(!postJsonFile.exists()){
+				System.out.println("Arquivo nao encontrado");
+				return;
+			}
 			List<String> lines = FileUtilsLemanoman.readFile("/home/kevim/posts/posts-"+dateHoje+".txt");
 			ArrayNode posts = mapper.readValue(postJsonFile,ArrayNode.class);
 			
-			boolean exists = false;
 			for(int p=0;p<posts.size();p++){
 				JsonNode post = posts.get(p);
 				if(post.get("date").textValue().contains(dateHoje)){
-					exists = true;
-					break;
+					System.out.println("Ja existe posts na data: "+dateHoje);
+					return;
 				}
 			}
+			
 			ArrayNode newPosts = mapper.createArrayNode();
 			ArrayNode videoPosts = mapper.createArrayNode();
 			for(String l:lines){
