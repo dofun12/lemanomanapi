@@ -105,6 +105,7 @@ public class Download {
 		String title = doc.getElementsByTag("title").get(0).text();
 		System.out.println(title+" - "+toDownload);
 		//System.out.println(html);
+		title = title.replaceAll("[^A-z0-9]", "_")+".flv";
 		download(httpclient, toDownload,title);
 		/**
 		GetMethod method = new GetMethod(resource_url);
