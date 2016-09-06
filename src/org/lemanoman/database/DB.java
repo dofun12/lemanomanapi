@@ -15,17 +15,25 @@ public class DB {
 	private Connection connection = null;
 	private String user = "";
 
+	public DB(String host,String port,String database,String user,String passwd) {
+		initConnection(host,port,database,user,passwd);
+	}
+	
+	public DB(String host,String database,String user,String passwd) {
+		initConnection(host,"3306",database,user,passwd);
+	}
+	
 	public DB() {
-		initConnection();
+		initConnection("192.168.25.104","3306","magicmanager","teste","teste");
 	}
 
-	public void initConnection() {
+	public void initConnection(String host,String port,String database,String user,String passwd) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			this.connection = DriverManager.getConnection(
-					"jdbc:mysql://192.168.25.104:3306/magicmanager?characterEncoding=UTF-8&useSSL=false", "teste",
-					"teste");
+					"jdbc:mysql://"+host+":"+port+"/"+database+"?characterEncoding=UTF-8&useSSL=false",user,
+					passwd);
 
 		} catch (SQLException sqlE) {
 			sqlE.printStackTrace();
@@ -60,7 +68,8 @@ public class DB {
 			Matcher m = p.matcher(query);
 			connection.setAutoCommit(false);
 
-			String tempQuery = query.replaceAll(":(.*?)[^A-z0-9]", "?");
+			String tempQuery = query.replaceAll(":(.*?)[^A-z0-9]", "?,");
+			tempQuery = tempQuery.replaceAll(",\\)",")");
 			ps = connection.prepareStatement(tempQuery);
 
 			int index = 0;
@@ -103,5 +112,9 @@ public class DB {
 			System.err.println("Erro ao fechar a connection");
 			e.printStackTrace();
 		}
+	}
+	
+	public Connection getConnection(){
+		return connection;
 	}
 }
