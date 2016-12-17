@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
  
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.CipherOutputStream;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
@@ -24,12 +25,12 @@ public class CryptoUtils {
     private static String key = "Hello world :)  ";
  
     public static void encrypt(File inputFile, File outputFile) throws CryptoException {
-        doCrypto(Cipher.ENCRYPT_MODE,inputFile, outputFile);
+	doCryptoLessMem(Cipher.ENCRYPT_MODE,inputFile, outputFile);
     }
  
     public static void decrypt(File inputFile, File outputFile)
             throws CryptoException {
-        doCrypto(Cipher.DECRYPT_MODE,inputFile, outputFile);
+	doCryptoLessMem(Cipher.DECRYPT_MODE,inputFile, outputFile);
     }
  
     private static void doCrypto(int cipherMode, File inputFile,
@@ -54,6 +55,35 @@ public class CryptoUtils {
         } catch (NoSuchPaddingException | NoSuchAlgorithmException
                 | InvalidKeyException | BadPaddingException
                 | IllegalBlockSizeException | IOException ex) {
+            throw new CryptoException("Error encrypting/decrypting file", ex);
+        }
+    }
+    
+    private static void doCryptoLessMem(int cipherMode, File inputFile,
+            File outputFile) throws CryptoException {
+        try {
+            Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
+            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+            cipher.init(cipherMode, secretKey);
+             
+            FileInputStream inputStream = new FileInputStream(inputFile);
+            FileOutputStream outputStream = new FileOutputStream(outputFile);
+            CipherOutputStream output = new CipherOutputStream(outputStream,cipher);
+            
+            byte[] buffer = new byte[8192];
+            int count;
+            while ((count = inputStream.read(buffer)) > 0)
+            {
+        	output.write(buffer, 0, count);
+                
+            }
+            
+            inputStream.close();
+            outputStream.close();
+            output.close();
+             
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException
+                | InvalidKeyException | IOException ex) {
             throw new CryptoException("Error encrypting/decrypting file", ex);
         }
     }
