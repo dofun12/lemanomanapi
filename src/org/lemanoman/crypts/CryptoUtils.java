@@ -24,7 +24,7 @@ public class CryptoUtils {
     private static final String TRANSFORMATION = "AES";
     private static String key = "Hello world :)  ";
  
-    public static void encrypt(File inputFile, File outputFile) throws CryptoException {
+    public static void encrypt(File inputFile, File outputFile) throws Exception {
 	doCryptoLessMem(Cipher.ENCRYPT_MODE,inputFile, outputFile);
     }
  

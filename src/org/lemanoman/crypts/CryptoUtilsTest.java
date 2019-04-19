@@ -20,6 +20,9 @@ public class CryptoUtilsTest {
         } catch (CryptoException ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
-        }
+        } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

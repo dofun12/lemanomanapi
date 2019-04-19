@@ -4,6 +4,7 @@
 	<groupId>org.lemanomanapps</groupId>
 	<artifactId>lemanomanapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<properties><jacksonVersion>2.9.8</jacksonVersion></properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -36,17 +37,17 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.6.3</version>
+			<version>${jacksonVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.6.3</version>
+			<version>${jacksonVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.6.3</version>
+			<version>${jacksonVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
