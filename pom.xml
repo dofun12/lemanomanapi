@@ -4,7 +4,10 @@
 	<groupId>org.lemanoman</groupId>
 	<artifactId>lemanomanapi</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
-	<properties><jacksonVersion>2.9.8</jacksonVersion></properties>
+    <properties>
+        <jacksonVersion>2.9.8</jacksonVersion>
+    </properties>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -70,5 +73,5 @@
 
 
 	</dependencies>
-	<packaging>ejb</packaging>
+	<packaging>jar</packaging>
 </project>

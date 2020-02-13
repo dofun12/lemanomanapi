@@ -9,7 +9,7 @@ public class ArgsInterpreter {
         this.listener = listener;
 
         if (listener != null) {
-            if (args != null) {
+            if (args != null && args.length>0) {
                 for (String arg : args) {
                     arg = arg.replaceAll("\"","");
                     if (arg.startsWith("--")) {
@@ -32,6 +32,8 @@ public class ArgsInterpreter {
                     }
 
                 }
+            }else{
+                listener.onNoArgs();
             }
 
         }
@@ -57,6 +59,11 @@ public class ArgsInterpreter {
             @Override
             public void onOperation(String operation) {
                 System.out.println("Running operation: " + operation);
+            }
+
+            @Override
+            public void onNoArgs() {
+
             }
         });
 
