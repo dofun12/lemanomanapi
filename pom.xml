@@ -5,7 +5,7 @@
 	<artifactId>lemanomanapi</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
     <properties>
-        <jacksonVersion>2.10.2</jacksonVersion>
+        <jacksonVersion>2.12.1</jacksonVersion>
     </properties>
 
 	<build>
