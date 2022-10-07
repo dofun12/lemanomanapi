@@ -10,7 +10,7 @@ public class Crypts {
 			md = MessageDigest.getInstance("MD5");
 			md.update(password.getBytes());
 
-			byte byteData[] = md.digest();
+			byte[] byteData = md.digest();
 
 			StringBuffer sb = new StringBuffer();
 			for (int i = 0; i < byteData.length; i++){

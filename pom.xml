@@ -5,18 +5,31 @@
 	<artifactId>lemanomanapi</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
     <properties>
-        <jacksonVersion>2.10.2</jacksonVersion>
+        <jacksonVersion>2.13.4</jacksonVersion>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<nexus.url>http://192.168.15.101:8085</nexus.url>
     </properties>
 
 	<build>
-		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<serverId>nexus</serverId>
+					<nexusUrl>${nexus.url}/nexus/</nexusUrl>
+					<skipStaging>true</skipStaging>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -30,7 +43,7 @@
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>
 			<artifactId>jna</artifactId>
-			<version>4.1.0</version>
+			<version>4.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>
