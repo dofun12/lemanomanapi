@@ -10,7 +10,16 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<nexus.url>http://192.168.15.101:8085</nexus.url>
     </properties>
-
+	<distributionManagement>
+		<repository>
+			<id>nexus-releases</id>
+			<url>${nexus.url}/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>${nexus.url}/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
